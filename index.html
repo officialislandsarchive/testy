@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>System Info</title>
+  <style>
+    body {
+      background: #111;
+      color: #0f0;
+      font-family: monospace;
+      padding: 20px;
+    }
+    pre {
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <pre id="json">Loading...</pre>
+
+  <script>
+    fetch("/sysinfo")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("json").textContent = JSON.stringify(data, null, 2);
+      })
+      .catch(err => {
+        document.getElementById("json").textContent = "Error loading JSON.";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
